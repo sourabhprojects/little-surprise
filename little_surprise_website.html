@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff1f5">
+<title>A Little Surprise ✨</title>
+<style>
+:root{--pink:#ff5f91;--deep:#8f315d;--cream:#fff8f4;--ink:#382b35;--muted:#806c79;--card:rgba(255,255,255,.82)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 5%,#ffe0eb 0,transparent 35%),radial-gradient(circle at 90% 20%,#ffe7d3 0,transparent 32%),linear-gradient(135deg,#fff8f4,#fce9f2);overflow-x:hidden}
+button,input,textarea{font:inherit}
+button{cursor:pointer;border:0;border-radius:999px;padding:12px 18px;font-weight:750;transition:transform .15s,filter .15s}
+button:active{transform:scale(.97)}
+.primary{background:linear-gradient(135deg,#ff5f91,#d74783);color:white;box-shadow:0 8px 22px #e85b9140}
+.secondary{background:#fff;color:var(--deep);border:1px solid #f3c7d8}
+.wrap{width:min(100% - 28px,760px);margin:0 auto;padding:28px 0 44px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}
+.brand{font-weight:900;letter-spacing:.2px;color:var(--deep)}.pill{font-size:.78rem;background:#ffffffa8;border:1px solid #f4d5e1;padding:7px 11px;border-radius:99px;color:var(--muted)}
+.panel{background:var(--card);border:1px solid #fff;box-shadow:0 18px 55px #8f315d13;backdrop-filter:blur(12px);border-radius:28px;padding:clamp(22px,5vw,42px);text-align:center}
+.screen{display:none}.screen.active{display:block;animation:appear .35s ease}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.emoji{font-size:clamp(3.4rem,12vw,5.3rem);line-height:1.2;margin:6px 0 14px}
+h1{font-size:clamp(2rem,7vw,3.35rem);line-height:1.06;letter-spacing:-1.5px;margin:8px 0 14px}
+h2{font-size:clamp(1.55rem,5vw,2.3rem);letter-spacing:-.7px;margin:7px 0 12px}
+p{line-height:1.65;color:var(--muted);margin:0 auto 20px;max-width:540px}
+.small{font-size:.86rem}.input{width:min(100%,300px);padding:13px 16px;border:1px solid #edc6d6;border-radius:14px;background:#fff;outline:none;text-align:center;letter-spacing:4px;margin:4px 0 12px}.input:focus,textarea:focus{border-color:var(--pink);box-shadow:0 0 0 3px #ff5f9120}
+.keypad{display:grid;grid-template-columns:repeat(3,minmax(55px,74px));gap:9px;justify-content:center;margin:14px auto 16px}.keypad button{background:#fff;border:1px solid #f1d4df;color:var(--deep);font-size:1.15rem;padding:12px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+.note{background:#fff9fc;border:1px dashed #efabc7;border-radius:18px;padding:18px;text-align:left;color:#68465a;line-height:1.75;margin:18px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0}
+.tile{background:#fff;border:1px solid #f5d8e4;border-radius:18px;padding:18px 12px;color:var(--deep);font-weight:800;min-height:110px}
+.tile span{display:block;font-size:1.9rem;margin-bottom:7px}
+.flowerrow{font-size:2rem;letter-spacing:5px;margin:12px 0 20px}
+.coupon{border:2px dashed #f2a9c5;background:#fff9fc;border-radius:16px;padding:15px;margin:10px 0;text-align:left}
+.coupon strong{color:var(--deep)}.coupon p{font-size:.92rem;margin:5px 0 0}
+textarea{width:100%;min-height:120px;resize:vertical;padding:14px;border:1px solid #edc6d6;border-radius:16px;background:#fff;outline:none;color:var(--ink);letter-spacing:normal}
+footer{text-align:center;color:#987f8d;font-size:.78rem;margin-top:18px}
+.toast{min-height:22px;color:var(--deep);font-size:.9rem;margin-top:6px}
+.confetti{position:fixed;top:-20px;pointer-events:none;animation:fall 3.8s linear forwards;z-index:5}
+@keyframes fall{to{transform:translateY(110vh) rotate(600deg);opacity:.15}}
+@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.panel{border-radius:23px}.top{align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="brand">♡ A LITTLE SURPRISE</div><div class="pill">made with care ✨</div></div>
+  <main class="panel">
+    <section class="screen active" id="welcome">
+      <div class="emoji">🎁</div>
+      <div class="pill">A tiny thing, just for you</div>
+      <h1>Someone made<br>you a surprise.</h1>
+      <p>There are a few little things waiting inside. Ready to open them?</p>
+      <button class="primary" onclick="show('lock')">Open my surprise →</button>
+      <p class="small" style="margin-top:18px">Tip: the creator can customize the text and passcode in the HTML file.</p>
+    </section>
+
+    <section class="screen" id="lock">
+      <div class="emoji">🔐</div><h2>A little secret</h2>
+      <p>Enter the 4-digit code to continue.</p>
+      <input class="input" id="pin" inputmode="numeric" maxlength="4" placeholder="••••" aria-label="Four digit passcode">
+      <div class="keypad">
+        <button onclick="digit('1')">1</button><button onclick="digit('2')">2</button><button onclick="digit('3')">3</button>
+        <button onclick="digit('4')">4</button><button onclick="digit('5')">5</button><button onclick="digit('6')">6</button>
+        <button onclick="digit('7')">7</button><button onclick="digit('8')">8</button><button onclick="digit('9')">9</button>
+        <button onclick="clearPin()">⌫</button><button onclick="digit('0')">0</button><button onclick="checkPin()">✓</button>
+      </div>
+      <div class="toast" id="pinMsg" aria-live="polite"></div>
+      <div class="actions"><button class="secondary" onclick="show('welcome')">Go back</button><button class="primary" onclick="checkPin()">Unlock ✨</button></div>
+      <p class="small" style="margin-top:14px">Demo passcode: <strong>1432</strong></p>
+    </section>
+
+    <section class="screen" id="home">
+      <div class="emoji">💗</div><h1>For someone<br>pretty special.</h1>
+      <p>Pick any card below. Each one has a little surprise inside.</p>
+      <div class="grid">
+        <button class="tile" onclick="show('message')"><span>💌</span>Secret message</button>
+        <button class="tile" onclick="show('birthday')"><span>🎂</span>Celebration</button>
+        <button class="tile" onclick="show('flowers')"><span>🌷</span>Flowers for you</button>
+        <button class="tile" onclick="show('coupons')"><span>🎟️</span>Little coupons</button>
+        <button class="tile" onclick="show('letter')"><span>📝</span>A personal letter</button>
+        <button class="tile" onclick="surprise()"><span>🎉</span>Random surprise</button>
+      </div>
+      <button class="secondary" onclick="show('welcome')">Start again ↺</button>
+    </section>
+
+    <section class="screen" id="message">
+      <div class="emoji">💌</div><h2>A small reminder</h2>
+      <div class="note">You make ordinary moments feel a little brighter. Never forget that you matter, you are appreciated, and you deserve plenty of good things. Keep being wonderfully you. 💗</div>
+      <div class="actions"><button class="secondary" onclick="show('home')">← All surprises</button><button class="primary" onclick="show('birthday')">Next surprise →</button></div>
+    </section>
+
+    <section class="screen" id="birthday">
+      <div class="emoji">🎂✨</div><div class="pill">A reason to celebrate</div>
+      <h1>Make a wish!</h1>
+      <p>May your days be full of laughter, your plans bring you joy, and lovely surprises find you when you least expect them.</p>
+      <button class="primary" onclick="confetti();document.getElementById('wishMsg').textContent='Wish sent into the universe! ✨'">Make a wish 🎉</button>
+      <div class="toast" id="wishMsg" aria-live="polite"></div>
+      <div class="actions"><button class="secondary" onclick="show('home')">← All surprises</button><button class="primary" onclick="show('flowers')">Next →</button></div>
+    </section>
+
+    <section class="screen" id="flowers">
+      <div class="emoji">🌷</div><h2>Flowers, just because</h2>
+      <div class="flowerrow">🌸 🌷 🌼 🌻 🌷</div>
+      <p>Not every beautiful thing needs a special occasion. Sometimes, a little kindness is reason enough.</p>
+      <div class="note" style="text-align:center">Sending you a bunch of smiles<br>and a garden full of good vibes. 🌿</div>
+      <div class="actions"><button class="secondary" onclick="show('home')">← All surprises</button><button class="primary" onclick="show('coupons')">Next →</button></div>
+    </section>
+
+    <section class="screen" id="coupons">
+      <div class="emoji">🎟️</div><h2>Little happiness coupons</h2><p>Tap a coupon to reveal what it means.</p>
+      <button class="coupon" onclick="reveal('c1','A no-reason compliment: you are doing better than you think. 💗')"><strong>🎫 Coupon 01 — A compliment</strong><p id="c1">Tap to redeem</p></button>
+      <button class="coupon" onclick="reveal('c2','One free choice of a movie, song, or game. Your pick! 🍿')"><strong>🎫 Coupon 02 — Your choice</strong><p id="c2">Tap to redeem</p></button>
+      <button class="coupon" onclick="reveal('c3','A little reminder to take a break, breathe, and do something you enjoy. 🌿')"><strong>🎫 Coupon 03 — A happy break</strong><p id="c3">Tap to redeem</p></button>
+      <div class="actions"><button class="secondary" onclick="show('home')">← All surprises</button><button class="primary" onclick="show('letter')">Next →</button></div>
+    </section>
+
+    <section class="screen" id="letter">
+      <div class="emoji">📝</div><h2>A note from the creator</h2>
+      <p>This part is editable. Write a personal message here, then share the website with someone.</p>
+      <textarea id="letterText" aria-label="Personal letter">Hey you,
+
+I made this little page to put a smile on your face. I hope it reminds you that you are appreciated.
+
+Keep smiling and take care of yourself. 💗
+
+— Someone who wishes you well</textarea>
+      <div class="actions"><button class="secondary" onclick="show('home')">← All surprises</button><button class="primary" onclick="show('finish')">Finish ✨</button></div>
+    </section>
+
+    <section class="screen" id="finish">
+      <div class="emoji">🫶</div><h1>That's all for now.</h1>
+      <p>I hope this little corner of the internet made you smile. You can open it again any time.</p>
+      <button class="primary" onclick="confetti();show('home')">Open it again 💖</button>
+    </section>
+  </main>
+  <footer>Made with ♡ · A customizable surprise page</footer>
+</div>
+<script>
+/* CUSTOMIZE HERE: change the demo passcode and the message text. */
+const PASSCODE = "1432";
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const target=document.getElementById(id);if(target)target.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function digit(n){const pin=document.getElementById('pin');if(pin.value.length<4)pin.value+=n;document.getElementById('pinMsg').textContent='';}
+function clearPin(){const pin=document.getElementById('pin');pin.value=pin.value.slice(0,-1);document.getElementById('pinMsg').textContent='';}
+function checkPin(){const pin=document.getElementById('pin');if(pin.value===PASSCODE){document.getElementById('pinMsg').textContent='Unlocked! 💗';pin.value='';show('home');}else{document.getElementById('pinMsg').textContent='Not quite — try again 💭';pin.value='';}}
+document.getElementById('pin').addEventListener('keydown',e=>{if(e.key==='Enter')checkPin();});
+function reveal(id,text){document.getElementById(id).textContent=text;}
+function surprise(){const pages=['message','birthday','flowers','coupons','letter'];show(pages[Math.floor(Math.random()*pages.length)]);}
+function confetti(){const bits=['💗','✨','🌸','🎉','💖','⭐'];for(let i=0;i<32;i++){const el=document.createElement('span');el.className='confetti';el.textContent=bits[Math.floor(Math.random()*bits.length)];el.style.left=Math.random()*100+'vw';el.style.animationDelay=Math.random()*.8+'s';el.style.fontSize=(16+Math.random()*18)+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),4800);}}
+</script>
+</body>
+</html>
